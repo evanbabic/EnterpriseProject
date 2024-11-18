@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EnterpriseProject.styles.css" asp-append-version="true" />
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -22,9 +23,40 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resumes</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownResume">
+                                <li><a class="dropdown-item" asp-controller="Resume" asp-action="ViewResume">View Resume</a></li>
+                                <li><a class="dropdown-item" asp-controller="Resume" asp-action="UploadResume">Upload Resume</a></li>
+                                <li><a class="dropdown-item" asp-controller="Resume" asp-action="DeleteResume">Delete Resume</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownResume">
+                                <li><a class="dropdown-item" asp-controller="Project" asp-action="ViewProjects">View Projects</a></li>
+                                <li><a class="dropdown-item" asp-controller="Project" asp-action="CreateProject">Create Project</a></li>
+                                <li><a class="dropdown-item" asp-controller="Project" asp-action="EditProject">Edit Project</a></li>
+                                <li><a class="dropdown-item" asp-controller="Project" asp-action="DeleteProject">Delete Project</a></li>
+                            </ul>
+                        </li>
+
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                            </li>
+                            
+                        </ul>
+
+
                     </ul>
                 </div>
             </div>
