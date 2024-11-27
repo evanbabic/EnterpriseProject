@@ -1,7 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EnterpriseProject.Entities.Resume
+
 @{
+	ViewData["Title"] = "View Resume";
 }
 
-<h1>View Resume Page</h1>
+<h1>@(Model.User.UserName)'s Resume</h1>
+
+<iframe src="@Model.FilePath" width="100%" height="800"></iframe>

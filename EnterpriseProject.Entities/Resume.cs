@@ -20,6 +20,5 @@ namespace EnterpriseProject.Entities
         [ForeignKey("User")]
         public int UserId { get; set; }
         public virtual User User { get; set; }
-
     }
 }

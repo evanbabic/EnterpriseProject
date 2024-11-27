@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EnterpriseProject.Entities;
+using EnterpriseProject.Services.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EnterpriseProject.Operations.Controllers
 {
-    public class ResumeController : Controller
+    public class ResumeController(IResumeRepository resumeRepository) : Controller
     {
-        public IActionResult ViewResume()
+        private readonly IResumeRepository resumeRepository = resumeRepository;
+
+        [HttpGet]
+        public IActionResult ViewResume(int id)
         {
-            return View();
+            Resume? resume = resumeRepository.GetResume(id);
+            
+            return View(resume);
         }
 
         public IActionResult DeleteResume()
