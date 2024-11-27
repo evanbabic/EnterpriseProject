@@ -1,1 +1,9 @@
 .vs/
+
+# No build folders
+EnterpriseProject/bin/
+EnterpriseProject/obj/
+EnterpriseProject.Entities/bin/
+EnterpriseProject.Entities/obj/
+EnterpriseProject.Services/bin/
+EnterpriseProject.Services/obj/
