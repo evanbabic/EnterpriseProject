@@ -9,6 +9,11 @@ namespace EnterpriseProject.Operations.Controllers
             return View();
         }
 
+        public IActionResult ViewProject()
+        {
+            return View();
+        }
+
         public IActionResult CreateProject()
         {
             return View(); 

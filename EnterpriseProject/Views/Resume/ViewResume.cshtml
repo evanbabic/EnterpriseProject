@@ -4,6 +4,14 @@
 	ViewData["Title"] = "View Resume";
 }
 
-<h1>@(Model.User.UserName)'s Resume</h1>
+@if (Model != null)
+{
+	<h1>@(Model.User.UserName)'s Resume</h1>
 
-<iframe src="@Model.FilePath" width="100%" height="800"></iframe>
+	<iframe src="@Model.FilePath" width="100%" height="800"></iframe>
+}
+
+else
+{
+	<p>No resume found.</p>
+}

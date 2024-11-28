@@ -1,0 +1,12 @@
+﻿@model EnterpriseProject.Entities.Project
+
+<div class="dashboard-container">
+    <p>Title: @Model.ProjectTitle</p>
+    <p>Description: @Model.Description</p>
+    <p>Image Path: @Model.ImagePath</p>
+    <p>Date Started: @Model.StartDate.ToShortDateString()</p>
+    <p>Date Completed: @Model.CompletedDate.ToShortDateString()</p>
+
+    <p>User: @Model.UserID</p>
+
+</div>
