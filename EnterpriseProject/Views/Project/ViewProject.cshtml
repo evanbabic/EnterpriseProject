@@ -1,12 +1,21 @@
 ﻿@model EnterpriseProject.Entities.Project
 
-<div class="dashboard-container">
-    <p>Title: @Model.ProjectTitle</p>
-    <p>Description: @Model.Description</p>
-    <p>Image Path: @Model.ImagePath</p>
-    <p>Date Started: @Model.StartDate.ToShortDateString()</p>
-    <p>Date Completed: @Model.CompletedDate.ToShortDateString()</p>
-
-    <p>User: @Model.UserID</p>
-
+<div class="container py-5">
+    <div class="row">
+        @if (Model != null)
+        {        
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm">
+                <img src=@Model.ImagePath class="card-img-top" alt="Image" />
+                <div class="card-body">
+                    <h5 class="card-title">@Model.ProjectTitle</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</p>
+                    <p><strong>Completion Date:</strong> @Model.CompletedDate.ToShortDateString()</p>
+                    <p><strong>User:</strong> @Model.User.UserName</p>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
 </div>

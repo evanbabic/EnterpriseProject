@@ -1,4 +1,5 @@
 ﻿using EnterpriseProject.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,16 @@ namespace EnterpriseProject.Services.Repositories
             _dbContext = context;
         }
 
-        public IEnumerable<Project> GetProjects(int userId) {
-            return _dbContext.Projects.ToList();
+        public IEnumerable<Project> GetProjects() {
+            return _dbContext.Projects.Include(p => p.User).ToList();
         }
 
         public Project? GetProject(int projectId) {
-            return _dbContext.Projects.FirstOrDefault(p => p.ProjectId == projectId);
+            Project? project = _dbContext.Projects
+                .Include(p => p.User)
+                .FirstOrDefault(p => p.ProjectId == projectId);
+
+            return project;
         }
 
         public void CreateProject(Project project) {

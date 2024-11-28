@@ -9,7 +9,7 @@ namespace EnterpriseProject.Services.Repositories
 {
     public interface IProjectRepository
     {
-        IEnumerable<Project> GetProjects(int userId);
+        IEnumerable<Project> GetProjects();
         Project? GetProject(int projectId);
         void CreateProject(Project project);
         void EditProject(int projectId);

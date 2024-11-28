@@ -31,7 +31,7 @@ namespace EnterpriseProject.Entities
         [Required]
         [ForeignKey("User")]
         public int UserID { get; set; } //Foreign Key
-        public User User { get; set; }  //Navigation Property
+        public virtual User User { get; set; }  //Navigation Property
 
     }
 }
