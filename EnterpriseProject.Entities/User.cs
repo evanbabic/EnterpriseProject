@@ -22,6 +22,7 @@ namespace EnterpriseProject.Entities
         public string Email { get; set; } = String.Empty;
 
         [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; } = String.Empty;
 
         public string? AboutMe { get; set; }

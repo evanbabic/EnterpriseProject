@@ -1,9 +1,11 @@
 ﻿using EnterpriseProject.Entities;
 using EnterpriseProject.Services.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EnterpriseProject.Operations.Controllers
 {
+    [Authorize]
     public class ResumeController(IResumeRepository resumeRepository) : Controller
     {
         private readonly IResumeRepository resumeRepository = resumeRepository;
