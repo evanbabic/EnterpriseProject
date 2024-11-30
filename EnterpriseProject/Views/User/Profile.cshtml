@@ -1,7 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EnterpriseProject.Entities.User
+
+<style>
+	.center
+	{
+		max-width: fit-content;
+		margin-inline: auto;
+		text-align: center;
+	}
+</style>
+
 @{
+	ViewData["Title"] = (Model != null ? Model.UserName + "'s " : "") + "Profile";
 }
 
-<h1>View Profile Page</h1>
+@if (Model != null)
+{
+	<div class="center">
+		<h2>@Model.UserName</h2>
+		<h3>@Model.Email</h3>
+		@if (Model.Resume != null)
+		{
+			<form asp-action="ViewResume" asp-controller="Resume" method="get">
+				<input type="hidden" name="resumeId" value="@Model.Resume.ResumeId" />
+
+				<button type="submit" class="btn btn-primary">View Resume</button>
+			</form>
+		}
+		else if (ViewBag.IsMyProfile)
+		{
+			<form asp-action="UploadResume" asp-controller="Resume" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="userId" value="@Model.UserId" />
+
+				<div>
+					<input type="file" name="resumeFile" accept=".pdf" required />
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary">Upload Resume</button>
+				</div>
+			</form>
+		}
+	</div>
+
+	<p>@Model.AboutMe</p>
+}
+else
+{
+	<p>Invalid User ID.</p>
+}

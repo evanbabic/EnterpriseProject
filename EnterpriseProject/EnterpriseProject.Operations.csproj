@@ -27,8 +27,4 @@
     <Folder Include="DataLayer\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="wwwroot\Resumes\Nicholas Williams Resume.pdf" />
-  </ItemGroup>
-
 </Project>

@@ -62,7 +62,7 @@ namespace EnterpriseProject.Operations.Controllers
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim("UserId", user.UserId.ToString())
+                new Claim(Entities.User.ClaimType, user.UserId.ToString())
             };
 
                     var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -128,7 +128,7 @@ namespace EnterpriseProject.Operations.Controllers
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("Login");
 
-            int userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+            int userId = int.Parse(User.FindFirst(Entities.User.ClaimType)?.Value ?? "0");
             var user = _userRepository.GetUserDetails(userId);
 
             if (user == null)

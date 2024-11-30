@@ -9,6 +9,8 @@ namespace EnterpriseProject.Entities
 {
     public class User
     {
+        public const string ClaimType = "UserId";
+
         [Key]
         public int UserId { get; set; }
 
