@@ -45,14 +45,18 @@ namespace EnterpriseProject.Services.Repositories
                 existingProject.StartDate = project.StartDate;
                 existingProject.CompletedDate = project.CompletedDate;
                 existingProject.IsPublic = project.IsPublic;
+                _dbContext.SaveChanges();
             }
-
-            _dbContext.SaveChanges();
         }
 
         public void DeleteProject(int projectId)
         {
-            Console.WriteLine("Placeholder");
+            var existingProject = _dbContext.Projects.Find(projectId);
+            if (existingProject != null)
+            {
+                _dbContext.Projects.Remove(existingProject);
+                _dbContext.SaveChanges();
+            }
         }
     }
 }

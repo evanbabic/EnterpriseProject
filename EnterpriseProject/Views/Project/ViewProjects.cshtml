@@ -11,13 +11,17 @@
         {
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
-                    <img src=@project.ImagePath class="card-img-top" alt="Image" />
+                    <img src=@project.ImagePath class="card-img-top project-image" alt="Image" />
                     <div class="card-body">
                         <h5 class="card-title">@project.ProjectTitle</h5>
                         <p class="card-text">@project.Description</p>
                         <p><strong>Start Date:</strong> @project.StartDate.ToShortDateString()</p>
                         <p><strong>Completion Date:</strong> @project.CompletedDate.ToShortDateString()</p>
                         <p><strong>User:</strong> @project.User.UserName</p>
+
+                        <a href="@Url.Action("EditProject", "Project", new { id = project.ProjectId })" class="btn btn-dark btn-sm">Edit</a>
+                        <a href="@Url.Action("DeleteProject", "Project", new { id = project.ProjectId })" class="btn btn-dark btn-sm">Delete</a>
+
                     </div>
                 </div>
             </div>

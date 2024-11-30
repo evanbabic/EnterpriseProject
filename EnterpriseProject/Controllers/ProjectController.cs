@@ -10,6 +10,9 @@ namespace EnterpriseProject.Operations.Controllers
         private readonly IProjectRepository _projectRepository;
         private readonly IUserRepository _userRepository;
 
+        //Path of all project images
+        private readonly string _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "project_images");
+
         public ProjectController(IResumeRepository resumeRepository, IProjectRepository projectRepository, IUserRepository userRepository)
         {
             _resumeRepository = resumeRepository;
@@ -21,8 +24,7 @@ namespace EnterpriseProject.Operations.Controllers
             return View(_projectRepository.GetProject(id));
         }
 
-        public IActionResult ViewProjects()
-        {
+        public IActionResult ViewProjects() {
             return View(_projectRepository.GetProjects().ToList());
         }
 
@@ -32,28 +34,39 @@ namespace EnterpriseProject.Operations.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateProject(Project model)
+        public async Task<IActionResult> CreateProject(Project model, IFormFile projectImage)
         {
-            int userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+                if (projectImage != null && projectImage.Length > 0)
+                {
 
-            Project project = new Project
-            {
-                ProjectTitle = model.ProjectTitle,
-                Description = model.Description,
-                ImagePath = model.ImagePath,
-                StartDate = model.StartDate,
-                CompletedDate = model.CompletedDate,
-                IsPublic = model.IsPublic,
-                UserID = userId
-            };
+                    var fileName = Path.GetFileNameWithoutExtension(projectImage.FileName) + "_"
+                        + Guid.NewGuid().ToString() + Path.GetExtension(projectImage.FileName);
 
-            _projectRepository.CreateProject(project);
-            return RedirectToAction("ViewProjects");
+                    var filePath = Path.Combine(_imageFolderPath, fileName);
+
+                    Directory.CreateDirectory(_imageFolderPath);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create)) {
+                        await projectImage.CopyToAsync(fileStream);
+                    }
+
+                    model.ImagePath = "/uploads/project_images/" + fileName;
+                }
+
+                int userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+                model.UserID = userId;
+                _projectRepository.CreateProject(model);
+                return RedirectToAction("ViewProjects");
         }
 
         [HttpGet]
         public IActionResult EditProject(int id) {
-            return View(_projectRepository.GetProject(id));
+
+            var project = _projectRepository.GetProject(id);
+
+            if (project == null) { return NotFound(); }
+
+            return View(project);
         }
 
         [HttpPost]
@@ -79,9 +92,23 @@ namespace EnterpriseProject.Operations.Controllers
             return View(model);
         }
 
-        public IActionResult DeleteProject()
+        [HttpGet]
+        public IActionResult DeleteProject(int id) {
+            var project = _projectRepository.GetProject(id);
+
+            if (project == null) { return NotFound(); }
+
+            return View(project);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProjectConfirmed(int id)
         {
-            return View();
+            var project = _projectRepository.GetProject(id);
+            if (project == null) { return NotFound(); }
+            
+            _projectRepository.DeleteProject(id);
+            return RedirectToAction("ViewProjects");
         }
     }
 }
