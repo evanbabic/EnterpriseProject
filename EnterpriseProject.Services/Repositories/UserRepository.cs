@@ -1,4 +1,5 @@
 ﻿using EnterpriseProject.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,30 @@ namespace EnterpriseProject.Services.Repositories
             _dbContext = dbContext;
         }
 
-        public User GetUserDetails(int userId) {
-            return _dbContext.Users.FirstOrDefault(u => u.UserId == userId);
+        public User GetUserDetails(int userId)
+        {
+            return _dbContext.Users
+                .Include(u => u.Projects) 
+                .Include(u => u.Resume)   
+                .FirstOrDefault(u => u.UserId == userId);
         }
-
-        public void CreateUser(User user) { }
+        public void AddUser(User user) 
+        { 
+            _dbContext.Users.Add(user);
+            _dbContext.SaveChanges();
+        
+        }
         public void EditUser(int userId) { }
         public void DeleteUser(int userId) { }
+
+        public User GetUserByEmailAndPassword(string email, string password)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
+        }
+
+        public bool CheckUserExists(string email)
+        {
+            return _dbContext.Users.Any(u => u.Email == email);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using EnterpriseProject.Services;
 using EnterpriseProject.Services.Repositories;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,16 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder
 builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
 builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+//Adding authentication here
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Dashboard/Login";
+        options.LogoutPath = "/Dashboard/Logout";
+        options.Cookie.Name = "AuthCookie";
+    });
+
 
 var app = builder.Build();
 
