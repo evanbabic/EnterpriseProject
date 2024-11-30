@@ -1,5 +1,4 @@
-﻿using EnterpriseProject.Entities;
-using EnterpriseProject.Services.Repositories;
+﻿using EnterpriseProject.Services.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnterpriseProject.Operations.Controllers

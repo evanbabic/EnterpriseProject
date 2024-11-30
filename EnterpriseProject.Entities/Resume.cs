@@ -10,11 +10,15 @@ namespace EnterpriseProject.Entities
 {
     public class Resume
     {
+        public const string Directory = "Resumes";
+        public const string FileExtension = ".pdf";
+
         [Key]
         public int ResumeId { get; set; }
 
         [Required]
         public string FilePath { get; set; } = String.Empty;
+        public string RelativeFilePath => Path.Combine("/" + Directory, UserId.ToString(), FilePath);
 
         [Required]
         [ForeignKey("User")]
