@@ -1,6 +1,7 @@
 ﻿using EnterpriseProject.Entities;
 using EnterpriseProject.Services.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EnterpriseProject.Operations.Controllers
 {
@@ -10,9 +11,13 @@ namespace EnterpriseProject.Operations.Controllers
 		private readonly IWebHostEnvironment webHostEnvironment = webHostEnvironment;
 
 		[HttpGet]
-		public IActionResult ViewResume(int id)
+		public IActionResult ViewResume(int resumeId)
 		{
-			Resume? resume = resumeRepository.GetResume(id);
+			Resume? resume = resumeRepository.GetResume(resumeId);
+
+			Claim? myIdClaim = User.FindFirst(Entities.User.ClaimType);
+			int? myId = myIdClaim != null ? int.Parse(myIdClaim.Value) : null;
+			ViewBag.IsMyProfile = resume != null && myId.HasValue && resume.UserId == myId;
 
 			return View(resume);
 		}
@@ -23,7 +28,7 @@ namespace EnterpriseProject.Operations.Controllers
 			Resume? userResume = resumeRepository.GetResumes().FirstOrDefault(resume => resume.UserId == userId);
 			if (userResume == null)
 			{
-				return RedirectToAction(nameof(UserController.Profile), nameof(Entities.User), new { id = userId });
+				return RedirectToAction(nameof(UserController.Profile), nameof(Entities.User), new { userId });
 			}
 
 			string userResumePath = Path.Combine(webHostEnvironment.WebRootPath, Resume.Directory, userId.ToString(), userResume.FilePath);
@@ -31,7 +36,7 @@ namespace EnterpriseProject.Operations.Controllers
 
 			resumeRepository.DeleteResume(userResume.ResumeId);
 
-			return RedirectToAction(nameof(UserController.Profile), nameof(Entities.User), new { id = userId });
+			return RedirectToAction(nameof(UserController.Profile), nameof(Entities.User), new { userId });
 		}
 
 		[HttpPost]
@@ -74,7 +79,7 @@ namespace EnterpriseProject.Operations.Controllers
 				resumeRepository.AddResume(userResume);
 			}
 
-			return RedirectToAction(nameof(ViewResume), new { id = userResume.ResumeId });
+			return RedirectToAction(nameof(ViewResume), new { resumeId = userResume.ResumeId });
 		}
 	}
 }

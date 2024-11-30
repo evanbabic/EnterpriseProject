@@ -3,6 +3,8 @@
 <style>
 	.center
 	{
+		max-width: fit-content;
+		margin-inline: auto;
 		text-align: center;
 	}
 </style>
@@ -13,34 +15,33 @@
 
 @if (Model != null)
 {
-	<div>
-		<h2 class="center">@Model.UserName</h2>
-		<h3 class="center">@Model.Email</h3>
+	<div class="center">
+		<h2>@Model.UserName</h2>
+		<h3>@Model.Email</h3>
+		@if (Model.Resume != null)
+		{
+			<form asp-action="ViewResume" asp-controller="Resume" method="get">
+				<input type="hidden" name="resumeId" value="@Model.Resume.ResumeId" />
+
+				<button type="submit" class="btn btn-primary">View Resume</button>
+			</form>
+		}
+		else if (ViewBag.IsMyProfile)
+		{
+			<form asp-action="UploadResume" asp-controller="Resume" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="userId" value="@Model.UserId" />
+
+				<div>
+					<input type="file" name="resumeFile" accept=".pdf" required />
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary">Upload Resume</button>
+				</div>
+			</form>
+		}
 	</div>
 
 	<p>@Model.AboutMe</p>
-	if (ViewBag.IsMyProfile)
-	{
-		<form asp-action="UploadResume" asp-controller="Resume" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="userId" value="@Model.UserId" />
-
-			<div>
-				<input type="file" name="resumeFile" accept=".pdf" required/>
-			</div>
-			<div>
-				<button type="submit" class="btn btn-primary">@(Model.Resume != null ? "Replace" : "Upload") Resume</button>
-			</div>
-		</form>
-		@if (Model.Resume != null)
-		{
-			<br />
-			<form asp-action="DeleteResume" asp-controller="Resume" method="post">
-				<input type="hidden" name="userId" value="@Model.UserId" />
-
-				<button type="submit" class="btn btn-primary">Delete Resume</button>
-			</form>
-		}
-	}
 }
 else
 {
