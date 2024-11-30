@@ -1,56 +1,57 @@
-﻿
-<h1>Create Project Page</h1>
+﻿<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="form-group row">
+            <label for="ProjectTitle" class="col-sm-2 col-form-label">Project Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ProjectTitle" name="ProjectTitle" />
+            </div>
+        </div> <br />
 
-<form>
-    <div class="form-group row">
-        <label for="projectTitle" class="col-sm-2 col-form-label">Project Title</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="projectTitle" placeholder="Project Title" />
-        </div>
-    </div> <br />
+        <div class="form-group row">
+            <label for="Description" class="col-sm-2 col-form-label">Project Description</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="Description" name="Description" />
+            </div>
+        </div> <br />
 
-    <div class="form-group row">
-        <label for="projectDescription" class="col-sm-2 col-form-label">Project Description</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="projectDescription" />
-        </div>
-    </div> <br />
+        <div class="form-group row">
+            <label for="ImagePath" class="col-sm-2 col-form-label">Image</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ImagePath" name="ImagePath" />
 
-    <div class="form-group row">
-        <label for="projectImage" class="col-sm-2 col-form-label">Image Placeholder</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="projectImage" />
-        </div>
-    </div> <br />
+                <!-- <input type="file" class="form-control" id="projectImage" accept="image/*" />  ADD LATER   -->
+            </div>
+        </div> <br />
 
 
-    <div class="form-group row">
-        <label for="projectStartDate" class="col-sm-2 col-form-label">Date Started</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="projectStartDate" />
-        </div>
-    </div> <br />
+        <div class="form-group row">
+            <label for="StartDate" class="col-sm-2 col-form-label">Date Started</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="StartDate" name="StartDate" />
+            </div>
+        </div> <br />
 
-    <div class="form-group row">
-        <label for="projectCompleteDate" class="col-sm-2 col-form-label">Date Completed</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="projectCompleteDate" />
-        </div>
-    </div> <br />
+        <div class="form-group row">
+            <label for="CompletedDate" class="col-sm-2 col-form-label">Date Completed</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="CompletedDate" name="CompletedDate" />
+            </div>
+        </div> <br />
 
-    <div class="form-group row">
-        <div class="col-sm-2">Private?</div>
-        <div class="col-sm-10">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="projectPublic" />
+        <div class="form-group row">
+            <div class="col-sm-2">Public Project?</div>
+            <div class="col-sm-10">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="IsPublic" name="IsPublic" />
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="form-group-row">
-        <div class="col-sm-10">
-            <button type="submit" class="btn btn-primary">Create Project</button>
+        <div class="form-group-row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Create Project</button>
+            </div>
         </div>
-    </div>
 
-</form>
+    </form>
+</div>

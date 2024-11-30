@@ -26,14 +26,57 @@ namespace EnterpriseProject.Operations.Controllers
             return View(_projectRepository.GetProjects().ToList());
         }
 
-        public IActionResult CreateProject()
-        {
+        [HttpGet]
+        public IActionResult CreateProject() {
             return View(); 
         }
 
-        public IActionResult EditProject()
+        [HttpPost]
+        public IActionResult CreateProject(Project model)
         {
-            return View();
+            int userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+
+            Project project = new Project
+            {
+                ProjectTitle = model.ProjectTitle,
+                Description = model.Description,
+                ImagePath = model.ImagePath,
+                StartDate = model.StartDate,
+                CompletedDate = model.CompletedDate,
+                IsPublic = model.IsPublic,
+                UserID = userId
+            };
+
+            _projectRepository.CreateProject(project);
+            return RedirectToAction("ViewProjects");
+        }
+
+        [HttpGet]
+        public IActionResult EditProject(int id) {
+            return View(_projectRepository.GetProject(id));
+        }
+
+        [HttpPost]
+        public IActionResult EditProject(int id, Project model)
+        {
+            if (ModelState.IsValid)
+            {
+                var project = _projectRepository.GetProject(id);           
+
+                if (project == null) { return NotFound(); }
+            
+                project.ProjectTitle = model.ProjectTitle;
+                project.Description = model.Description;
+                project.ImagePath = model.ImagePath;
+                project.StartDate = model.StartDate;
+                project.CompletedDate = model.CompletedDate;
+                project.IsPublic = model.IsPublic;
+
+                _projectRepository.EditProject(project);
+                return RedirectToAction("ViewProjects");
+            }
+
+            return View(model);
         }
 
         public IActionResult DeleteProject()

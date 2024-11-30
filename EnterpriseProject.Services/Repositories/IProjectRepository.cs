@@ -12,7 +12,7 @@ namespace EnterpriseProject.Services.Repositories
         IEnumerable<Project> GetProjects();
         Project? GetProject(int projectId);
         void CreateProject(Project project);
-        void EditProject(int projectId);
+        void EditProject(Project project);
         void DeleteProject(int projectId);
     }
 }

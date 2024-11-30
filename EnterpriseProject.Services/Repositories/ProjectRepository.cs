@@ -29,13 +29,27 @@ namespace EnterpriseProject.Services.Repositories
         }
 
         public void CreateProject(Project project) {
-            Console.WriteLine("Placeholder");
+            _dbContext.Projects.Add(project);
+            _dbContext.SaveChanges();
         }
 
-        public void EditProject(int projectId)
+        public void EditProject(Project project)
         {
-            Console.WriteLine("Placeholder");
+            var existingProject = _dbContext.Projects.FirstOrDefault(p => project.ProjectId == p.ProjectId);
+            
+            if (existingProject != null)
+            {
+                existingProject.ProjectTitle = project.ProjectTitle;
+                existingProject.Description = project.Description;
+                existingProject.ImagePath = project.ImagePath;
+                existingProject.StartDate = project.StartDate;
+                existingProject.CompletedDate = project.CompletedDate;
+                existingProject.IsPublic = project.IsPublic;
+            }
+
+            _dbContext.SaveChanges();
         }
+
         public void DeleteProject(int projectId)
         {
             Console.WriteLine("Placeholder");
