@@ -20,38 +20,58 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resumes</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownResume">
-                                <li><a class="dropdown-item" asp-controller="Resume" asp-action="ViewResume">View Resume</a></li>
-                                <li><a class="dropdown-item" asp-controller="Resume" asp-action="UploadResume">Upload Resume</a></li>
-                                <li><a class="dropdown-item" asp-controller="Resume" asp-action="DeleteResume">Delete Resume</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownResume">
-                                <li><a class="dropdown-item" asp-controller="Project" asp-action="ViewProjects">View Projects</a></li>
-                                <li><a class="dropdown-item" asp-controller="Project" asp-action="CreateProject">Create Project</a></li>
-                                <li><a class="dropdown-item" asp-controller="Project" asp-action="EditProject">Edit Project</a></li>
-                                <li><a class="dropdown-item" asp-controller="Project" asp-action="DeleteProject">Delete Project</a></li>
-                            </ul>
-                        </li>
-                        </ul>
-
-                        <ul class="navbar-nav ms-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resumes</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownResume">
+                                    <li><a class="dropdown-item" asp-controller="Resume" asp-action="ViewResume">View Resume</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Resume" asp-action="UploadResume">Upload Resume</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Resume" asp-action="DeleteResume">Delete Resume</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownProject" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownProject">
+                                    <li><a class="dropdown-item" asp-controller="Project" asp-action="ViewProjects">View Projects</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Project" asp-action="CreateProject">Create Project</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Project" asp-action="EditProject">Edit Project</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Project" asp-action="DeleteProject">Delete Project</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-controller="Project" asp-action="ViewProjects">Projects</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <span class="nav-link text-light">Hi, @User.Identity.Name</span>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Register">Register</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Logout">Logout</a>
                             </li>
-                            
-                        </ul>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Register">Register</a>
+                            </li>
+                        }
+                    </ul>
+
                 </div>
             </div>
         </nav>

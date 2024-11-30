@@ -25,32 +25,66 @@ namespace EnterpriseProject.Operations.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<IActionResult> Login(string loginIdentifier, string password)
         {
-            var user = _userRepository.GetUserByEmailAndPassword(email, password);
-            if (user != null) 
+            // Retrieve user by username or email
+            var user = _userRepository.GetUserByUsernameOrEmail(loginIdentifier);
+
+            if (user != null)
             {
-                var claims = new List<Claim>
+                // Check if the stored password is hashed
+                bool isPasswordHashed = user.Password.StartsWith("$2") && user.Password.Length == 60;
+
+                bool isPasswordValid;
+
+                if (isPasswordHashed)
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim("UserId", user.UserId.ToString())
-                };
-
-                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                var authProperties = new AuthenticationProperties
+                    // Verify hashed password
+                    isPasswordValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+                }
+                else
                 {
-                    IsPersistent = true
-                };
+                    // Compare plaintext password
+                    isPasswordValid = user.Password == password;
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+                    // Optionally: hash the plaintext password after successful login
+                    if (isPasswordValid)
+                    {
+                        user.Password = BCrypt.Net.BCrypt.HashPassword(password);
+                        _userRepository.UpdateUser(user); // Ensure this updates the database
+                    }
+                }
 
-                return RedirectToAction("Index", "Dashboard");
+                if (isPasswordValid)
+                {
+                    // Password matches, proceed with authentication
+                    var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim("UserId", user.UserId.ToString())
+            };
+
+                    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var authProperties = new AuthenticationProperties
+                    {
+                        IsPersistent = true
+                    };
+
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                    return RedirectToAction("Index", "Dashboard");
+                }
             }
 
-            ViewBag.ErrorMessage = "Invalid email or password.";
+            // Handle invalid login attempt
+            ViewBag.ErrorMessage = "Invalid username/email or password.";
             return View();
         }
+
+
+
+
 
         [HttpGet]
         public IActionResult Register()
@@ -67,16 +101,20 @@ namespace EnterpriseProject.Operations.Controllers
                 return View();
             }
 
+            // Hash the password
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
+
             var user = new User
             {
                 UserName = userName,
                 Email = email,
-                Password = password // will implement hashing.
+                Password = hashedPassword // Storing the hashed password
             };
 
             _userRepository.AddUser(user);
             return RedirectToAction("Login", "Dashboard");
         }
+
 
         public async Task<IActionResult> Logout()
         {

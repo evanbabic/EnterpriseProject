@@ -38,6 +38,21 @@ namespace EnterpriseProject.Services.Repositories
             return _dbContext.Users.FirstOrDefault(u => u.Email == email && u.Password == password);
         }
 
+        public User GetUserByUsernameOrEmail(string loginIdentifier)
+        {
+            return _dbContext.Users
+                .Where(u => u.UserName.ToLower() == loginIdentifier.ToLower() ||
+                            u.Email.ToLower() == loginIdentifier.ToLower())
+                .FirstOrDefault();
+        }
+
+        public void UpdateUser(User user)
+        {
+            _dbContext.Users.Update(user);
+            _dbContext.SaveChanges();
+        }
+
+
         public bool CheckUserExists(string email)
         {
             return _dbContext.Users.Any(u => u.Email == email);
