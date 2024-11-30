@@ -7,3 +7,7 @@ EnterpriseProject.Entities/bin/
 EnterpriseProject.Entities/obj/
 EnterpriseProject.Services/bin/
 EnterpriseProject.Services/obj/
+
+# No temp db files
+*.db-shm
+*.db-wal
