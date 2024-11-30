@@ -28,6 +28,8 @@ namespace EnterpriseProject.Entities
         [DataType(DataType.Date)]
         public DateTime CompletedDate { get; set; }
 
+        public bool IsPublic { get; set; } = false;
+
         [Required]
         [ForeignKey("User")]
         public int UserID { get; set; } //Foreign Key

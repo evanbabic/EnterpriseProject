@@ -1,7 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
+﻿
 <h1>Create Project Page</h1>
+
+<form>
+    <div class="form-group row">
+        <label for="projectTitle" class="col-sm-2 col-form-label">Project Title</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectTitle" placeholder="Project Title" />
+        </div>
+    </div> <br />
+
+    <div class="form-group row">
+        <label for="projectDescription" class="col-sm-2 col-form-label">Project Description</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectDescription" />
+        </div>
+    </div> <br />
+
+    <div class="form-group row">
+        <label for="projectImage" class="col-sm-2 col-form-label">Image Placeholder</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectImage" />
+        </div>
+    </div> <br />
+
+
+    <div class="form-group row">
+        <label for="projectStartDate" class="col-sm-2 col-form-label">Date Started</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectStartDate" />
+        </div>
+    </div> <br />
+
+    <div class="form-group row">
+        <label for="projectCompleteDate" class="col-sm-2 col-form-label">Date Completed</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="projectCompleteDate" />
+        </div>
+    </div> <br />
+
+    <div class="form-group row">
+        <div class="col-sm-2">Private?</div>
+        <div class="col-sm-10">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="projectPublic" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group-row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Create Project</button>
+        </div>
+    </div>
+
+</form>
