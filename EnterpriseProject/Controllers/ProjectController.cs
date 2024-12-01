@@ -6,14 +6,14 @@ namespace EnterpriseProject.Operations.Controllers
 {
     public class ProjectController : Controller
     {
-        private readonly IResumeRepository _resumeRepository;
-        private readonly IProjectRepository _projectRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IResumeServices _resumeRepository;
+        private readonly IProjectServices _projectRepository;
+        private readonly IUserServices _userRepository;
 
         //Path of all project images
         private readonly string _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "project_images");
 
-        public ProjectController(IResumeRepository resumeRepository, IProjectRepository projectRepository, IUserRepository userRepository)
+        public ProjectController(IResumeServices resumeRepository, IProjectServices projectRepository, IUserServices userRepository)
         {
             _resumeRepository = resumeRepository;
             _projectRepository = projectRepository;

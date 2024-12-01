@@ -7,13 +7,13 @@ using System.Security.Claims;
 namespace EnterpriseProject.Operations.Controllers
 {
 	[Authorize]
-	public class ResumeController(IResumeRepository resumeRepository) : Controller
+	public class ResumeController(IResumeServices resumeRepository) : Controller
 	{
 		private static readonly HashSet<string> resumeFileExtensions = [".pdf"];
 		private static readonly string resumeFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "resumes");
 		private static readonly string relativeResumeFolderPath = "/uploads/resumes";
 
-		private readonly IResumeRepository resumeRepository = resumeRepository;
+		private readonly IResumeServices resumeRepository = resumeRepository;
 
 		[HttpGet]
 		public IActionResult ViewResume(int resumeId)

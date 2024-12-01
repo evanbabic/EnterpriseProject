@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public interface IUserRepository
+    public interface IUserServices
     {
         User GetUserByEmailAndPassword(string email, string password);
         public User GetUserByUsernameOrEmail(string loginIdentifier);

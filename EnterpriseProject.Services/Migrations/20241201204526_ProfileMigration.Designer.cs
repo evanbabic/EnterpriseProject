@@ -3,6 +3,7 @@ using System;
 using EnterpriseProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,45 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EnterpriseProject.Services.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241201204526_ProfileMigration")]
+    partial class ProfileMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
-
-            modelBuilder.Entity("EnterpriseProject.Entities.Comment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("ProfileId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("ProjectId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProfileId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Comments");
-                });
 
             modelBuilder.Entity("EnterpriseProject.Entities.Profile", b =>
                 {
@@ -164,29 +134,6 @@ namespace EnterpriseProject.Services.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("EnterpriseProject.Entities.Comment", b =>
-                {
-                    b.HasOne("EnterpriseProject.Entities.Profile", "Profile")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProfileId");
-
-                    b.HasOne("EnterpriseProject.Entities.Project", "Project")
-                        .WithMany("Comments")
-                        .HasForeignKey("ProjectId");
-
-                    b.HasOne("EnterpriseProject.Entities.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Profile");
-
-                    b.Navigation("Project");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EnterpriseProject.Entities.Profile", b =>
                 {
                     b.HasOne("EnterpriseProject.Entities.User", "User")
@@ -220,20 +167,8 @@ namespace EnterpriseProject.Services.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("EnterpriseProject.Entities.Profile", b =>
-                {
-                    b.Navigation("Comments");
-                });
-
-            modelBuilder.Entity("EnterpriseProject.Entities.Project", b =>
-                {
-                    b.Navigation("Comments");
-                });
-
             modelBuilder.Entity("EnterpriseProject.Entities.User", b =>
                 {
-                    b.Navigation("Comments");
-
                     b.Navigation("Profile")
                         .IsRequired();
 
