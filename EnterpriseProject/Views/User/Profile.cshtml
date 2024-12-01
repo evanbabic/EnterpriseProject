@@ -25,6 +25,9 @@
 
 				<button type="submit" class="btn btn-primary">View Resume</button>
 			</form>
+
+			<p>About Me: @Model.Profile.AboutMe</p>
+
 		}
 		else if (ViewBag.IsMyProfile)
 		{
@@ -40,8 +43,6 @@
 			</form>
 		}
 	</div>
-
-	<p>@Model.AboutMe</p>
 }
 else
 {

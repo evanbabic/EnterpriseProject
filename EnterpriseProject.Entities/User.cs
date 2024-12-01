@@ -27,10 +27,9 @@ namespace EnterpriseProject.Entities
         [DataType(DataType.Password)]
         public string Password { get; set; } = String.Empty;
 
-        public string? AboutMe { get; set; }
-
         // Navigation Properties
         public List<Project> Projects { get; set; } = new List<Project>();
         public Resume? Resume { get; set; }
+        public Profile Profile { get; set; } = new Profile();
     }
 }

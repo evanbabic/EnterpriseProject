@@ -24,7 +24,7 @@
 						@if (User.Identity.IsAuthenticated)
 						{
 							<li class="nav-item">
-								<a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Profile" asp-route-userId="@User.FindFirst(EnterpriseProject.Entities.User.ClaimType)!.Value">Profile</a>
+								<a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resumes</a>

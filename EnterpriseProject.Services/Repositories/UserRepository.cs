@@ -20,6 +20,7 @@ namespace EnterpriseProject.Services.Repositories
         public User GetUserDetails(int userId)
         {
             return _dbContext.Users
+                .Include(u => u.Profile)
                 .Include(u => u.Projects) 
                 .Include(u => u.Resume)   
                 .FirstOrDefault(u => u.UserId == userId);
