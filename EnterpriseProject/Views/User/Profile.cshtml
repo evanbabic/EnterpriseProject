@@ -1,4 +1,4 @@
-﻿@model EnterpriseProject.Entities.User
+﻿@model EnterpriseProject.Entities.Profile
 
 <style>
 	.center
@@ -10,29 +10,27 @@
 </style>
 
 @{
-	ViewData["Title"] = (Model != null ? Model.UserName + "'s " : "") + "Profile";
+	ViewData["Title"] = (Model != null ? Model.User.UserName + "'s " : "") + "Profile";
 }
 
 @if (Model != null)
 {
 	<div class="center">
-		<h2>@Model.UserName</h2>
-		<h3>@Model.Email</h3>
-		@if (Model.Resume != null)
+		<h2>@Model.User.UserName</h2>
+		<h3>@Model.User.Email</h3>
+		@if (Model.User.Resume != null)
 		{
 			<form asp-action="ViewResume" asp-controller="Resume" method="get">
-				<input type="hidden" name="resumeId" value="@Model.Resume.ResumeId" />
+				<input type="hidden" name="resumeId" value="@Model.User.Resume.ResumeId" />
 
 				<button type="submit" class="btn btn-primary">View Resume</button>
 			</form>
-
-			<p>About Me: @Model.Profile.AboutMe</p>
 
 		}
 		else if (ViewBag.IsMyProfile)
 		{
 			<form asp-action="UploadResume" asp-controller="Resume" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="userId" value="@Model.UserId" />
+				<input type="hidden" name="userId" value="@Model.User.UserId" />
 
 				<div>
 					<input type="file" name="resumeFile" accept=".pdf" required />
@@ -43,7 +41,18 @@
 			</form>
 		}
 	</div>
+
+	<p>About Me: @Model.AboutMe</p>
+
+	<p>Comments:</p>
+
+	@foreach (var comment in Model.Comments)
+	{
+		<p>@comment.User.UserName - @comment.CreatedAt.ToShortDateString()</p>
+		<p>@comment.Content</p>
+	}
 }
+
 else
 {
 	<p>Invalid User ID.</p>

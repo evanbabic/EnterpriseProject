@@ -1,4 +1,5 @@
 ﻿using EnterpriseProject.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,13 +16,12 @@ namespace EnterpriseProject.Services.Repositories
         public ProfileRepository(AppDbContext dbContext) { _dbContext = dbContext; }
 
 
-        public Profile getProfile(int id)
+        public Profile getProfile(int userId)
         {
-            var profile = _dbContext.Profiles.Find(id);
-
-            if (profile == null) { return null; }
-
-            return profile;
+            return _dbContext.Profiles
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .FirstOrDefault(p => p.UserId == userId);
         }
 
         public void editProfile()

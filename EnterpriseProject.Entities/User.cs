@@ -32,6 +32,6 @@ namespace EnterpriseProject.Entities
         public Resume? Resume { get; set; }
         public Profile Profile { get; set; } = new Profile();
 
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Comment> Comments { get; set; }
     }
 }

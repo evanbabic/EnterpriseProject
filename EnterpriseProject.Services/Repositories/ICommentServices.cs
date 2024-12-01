@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    internal interface ICommentServices
+    public interface ICommentServices
     {
+        void AddComment(int userId, int? profileId, int? projectId, string content);
     }
 }

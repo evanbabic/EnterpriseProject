@@ -24,23 +24,13 @@
 						@if (User.Identity.IsAuthenticated)
 						{
 							<li class="nav-item">
-								<a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Profile">Profile</a>
-							</li>
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownResume" role="button" data-bs-toggle="dropdown" aria-expanded="false">Resumes</a>
-								<ul class="dropdown-menu" aria-labelledby="navbarDropdownResume">
-									<li><a class="dropdown-item" asp-controller="Resume" asp-action="ViewResume">View Resume</a></li>
-									<li><a class="dropdown-item" asp-controller="Resume" asp-action="UploadResume">Upload Resume</a></li>
-									<li><a class="dropdown-item" asp-controller="Resume" asp-action="DeleteResume">Delete Resume</a></li>
-								</ul>
+								<a class="nav-link text-light" asp-area="" asp-controller="User" asp-action="Profile" asp-route-userId="@User.FindFirst(EnterpriseProject.Entities.User.ClaimType)!.Value">Profile</a>
 							</li>
 							<li class="nav-item dropdown">
 								<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdownProject" role="button" data-bs-toggle="dropdown" aria-expanded="false">Projects</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdownProject">
 									<li><a class="dropdown-item" asp-controller="Project" asp-action="ViewProjects">View Projects</a></li>
 									<li><a class="dropdown-item" asp-controller="Project" asp-action="CreateProject">Create Project</a></li>
-									<li><a class="dropdown-item" asp-controller="Project" asp-action="EditProject">Edit Project</a></li>
-									<li><a class="dropdown-item" asp-controller="Project" asp-action="DeleteProject">Delete Project</a></li>
 								</ul>
 							</li>
 							<li class="nav-item">
@@ -53,7 +43,7 @@
 						else
 						{
 							<li class="nav-item">
-								<a class="nav-link text-light" asp-controller="Project" asp-action="ViewProjects">Projects</a>
+								<a class="nav-link text-light" asp-controller="Project" asp-action="ViewProjects">Public Projects</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Login">Login</a>
