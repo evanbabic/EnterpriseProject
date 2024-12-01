@@ -28,24 +28,9 @@
 		</form>
 	}
 
-	<iframe src="@Model.RelativeFilePath" width="100%" height="800"></iframe>
+	<iframe src="@ViewBag.ResumeFilePath" width="100%" height="800"></iframe>
 }
-
 else
 {
 	<p>No resume found.</p>
-	if (ViewBag.IsMyProfile)
-	{
-		<form asp-action="UploadResume" asp-controller="Resume" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="userId" value="@Model.UserId" />
-
-			<div>
-				<input type="file" name="resumeFile" accept=".pdf" required />
-			</div>
-			<div>
-				<button type="submit" class="btn btn-primary">Upload Resume</button>
-			</div>
-		</form>
-	}
-
 }
