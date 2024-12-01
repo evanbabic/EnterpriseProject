@@ -1,21 +1,38 @@
 ﻿@model EnterpriseProject.Entities.Project
 
-<div class="container py-5">
+<section class="jumbotron text-center bg-light">
+    <h1 class="jumbotron-heading">@Model.ProjectTitle</h1>
+    <p class="lead">@Model.Description</p>
+</section>
+
+<div container="container py-5">
     <div class="row">
-        @if (Model != null)
-        {        
-        <div class="col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <img src=@Model.ImagePath class="card-img-top" alt="Image" />
-                <div class="card-body">
-                    <h5 class="card-title">@Model.ProjectTitle</h5>
-                    <p class="card-text">@Model.Description</p>
-                    <p><strong>Start Date:</strong> @Model.StartDate.ToShortDateString()</p>
-                    <p><strong>Completion Date:</strong> @Model.CompletedDate.ToShortDateString()</p>
-                    <p><strong>User:</strong> @Model.User.UserName</p>
-                </div>
+        <div class="col-lg-8 d-inline-flex">
+
+            <div class="mb-4">
+                <img src="@Model.ImagePath" alt="No project image found." class="img-fluid rounded shadow-sm" />
             </div>
         </div>
-        }
+        <div class="col-lg-8
+">
+            <div class="mb-4">
+                <h3>About the Project</h3>
+                <p>@Model.Description</p>
+            </div>
+
+            <div class="mb-4">
+                <h4>Project Owner</h4>
+                <p><strong>@Model.User.UserName</strong></p>
+                <p><strong>Email: </strong>@Model.User.Email</p>
+            </div>
+
+            @if (User.Identity.Name == @Model.User.UserName)
+            {
+                <div class="mb-4">
+                    <a href="@Url.Action("EditProject", "Project", new { id = Model.ProjectId })" class="btn btn-dark btn-sm">Edit</a>
+                    <a href="@Url.Action("DeleteProject", "Project", new { id = Model.ProjectId })" class="btn btn-dark btn-sm">Delete</a>
+                </div>
+            }
+        </div>
     </div>
 </div>
