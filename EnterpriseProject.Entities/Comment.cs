@@ -8,18 +8,23 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Entities
 {
-    public class Profile
+    public class Comment
     {
         [Key]
         public int Id { get; set; }
-        public string ProfilePicturePath { get; set; } = String.Empty;
-        public string BannerImagePath { get; set; } = String.Empty;
-        public string AboutMe { get; set; } = String.Empty;
+        public string Content { get; set; }
+        public DateTime CreatedAt { get; set; }
 
-        //Navigation Properties
         [ForeignKey("User")]
         public int UserId { get; set; }
         public virtual User User { get; set; }
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+
+        [ForeignKey("Profile")]
+        public int? ProfileId { get; set; }
+        public virtual Profile Profile { get; set; }
+
+        [ForeignKey("Project")]
+        public int? ProjectId { get; set; }
+        public virtual Project Project { get; set; }
     }
 }

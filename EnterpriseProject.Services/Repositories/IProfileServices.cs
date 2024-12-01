@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public interface IProfileRepository
+    public interface IProfileServices
     {
         Profile getProfile(int id);
         void editProfile();

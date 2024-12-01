@@ -9,10 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("SQLiteConnection")));
 
-builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
-builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+builder.Services.AddScoped<IResumeServices, ResumeRepository>();
+builder.Services.AddScoped<IProjectServices, ProjectRepository>();
+builder.Services.AddScoped<IUserServices, UserRepository>();
+builder.Services.AddScoped<IProfileServices, ProfileRepository>();
 
 //Adding authentication here
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

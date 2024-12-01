@@ -31,5 +31,7 @@ namespace EnterpriseProject.Entities
         public List<Project> Projects { get; set; } = new List<Project>();
         public Resume? Resume { get; set; }
         public Profile Profile { get; set; } = new Profile();
+
+        public List<Comment> Comments { get; set; } = new List<Comment>();
     }
 }

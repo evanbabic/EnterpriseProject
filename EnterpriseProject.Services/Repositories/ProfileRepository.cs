@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public class ProfileRepository : IProfileRepository
+    public class ProfileRepository : IProfileServices
     {
         private readonly AppDbContext _dbContext;
 

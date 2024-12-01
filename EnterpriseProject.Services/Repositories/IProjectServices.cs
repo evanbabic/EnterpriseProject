@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public interface IProjectRepository
+    public interface IProjectServices
     {
         IEnumerable<Project> GetProjects();
         Project? GetProject(int projectId);

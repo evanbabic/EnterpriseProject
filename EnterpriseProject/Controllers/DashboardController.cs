@@ -9,11 +9,11 @@ namespace EnterpriseProject.Operations.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly IResumeRepository _resumeRepository;
-        private readonly IProjectRepository _projectRepository;
-        private readonly IUserRepository _userRepository;
+        private readonly IResumeServices _resumeRepository;
+        private readonly IProjectServices _projectRepository;
+        private readonly IUserServices _userRepository;
 
-        public DashboardController(IResumeRepository resumeRepository, IProjectRepository projectRepository, IUserRepository userRepository) {
+        public DashboardController(IResumeServices resumeRepository, IProjectServices projectRepository, IUserServices userRepository) {
             _resumeRepository = resumeRepository;
             _projectRepository = projectRepository;
             _userRepository = userRepository;

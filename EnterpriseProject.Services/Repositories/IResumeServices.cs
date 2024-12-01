@@ -2,7 +2,7 @@
 
 namespace EnterpriseProject.Services.Repositories;
 
-public interface IResumeRepository
+public interface IResumeServices
 {
 	void AddResume(Resume employee);
 	Resume? GetResume(int id);

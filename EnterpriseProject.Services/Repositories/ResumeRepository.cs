@@ -3,7 +3,7 @@ using System;
 
 namespace EnterpriseProject.Services.Repositories;
 
-public class ResumeRepository(AppDbContext appDbContext) : IResumeRepository
+public class ResumeRepository(AppDbContext appDbContext) : IResumeServices
 {
 	private readonly AppDbContext appDbContext = appDbContext;
 

@@ -5,9 +5,9 @@ using System.Security.Claims;
 
 namespace EnterpriseProject.Operations.Controllers;
 
-public class UserController(IUserRepository userRepository) : Controller
+public class UserController(IUserServices userRepository) : Controller
 {
-	private readonly IUserRepository userRepository = userRepository;
+	private readonly IUserServices userRepository = userRepository;
 
 	[HttpGet]
 	public IActionResult Profile(int userId)
