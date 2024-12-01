@@ -44,11 +44,9 @@
 
 	<p>About Me: @Model.AboutMe</p>
 
-	<p>Comments:</p>
-
-	@foreach (var comment in Model.Comments)
+	@foreach(var comment in Model.Comments)
 	{
-		<p>@comment.User.UserName - @comment.CreatedAt.ToShortDateString()</p>
+		<p>Comment From: <strong>@comment.User.UserName</strong> on <i>@comment.CreatedAt</i></p>
 		<p>@comment.Content</p>
 	}
 }
