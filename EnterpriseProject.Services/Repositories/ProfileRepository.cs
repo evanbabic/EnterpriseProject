@@ -25,8 +25,40 @@ namespace EnterpriseProject.Services.Repositories
                 .FirstOrDefault(p => p.UserId == userId);
         }
 
-        public void editProfile()
-        { //To-do }
+        public void editProfile(Profile updatedProfile)
+        {
+            // getting the existing profile based on the userId from the database
+            var existingProfile = _dbContext.Profiles
+                .Include(p => p.User)
+                .FirstOrDefault(p => p.UserId == updatedProfile.UserId);
+
+            if (existingProfile != null)
+            {
+                // Update the AboutMe field
+                existingProfile.AboutMe = updatedProfile.AboutMe;
+
+                // Update the ProfilePicturePath (if new profile picture is provided)
+                if (!string.IsNullOrEmpty(updatedProfile.ProfilePicturePath))
+                {
+                    existingProfile.ProfilePicturePath = updatedProfile.ProfilePicturePath;
+                }
+
+                // Update the BannerImagePath (if new banner image is provided)
+                if (!string.IsNullOrEmpty(updatedProfile.BannerImagePath))
+                {
+                    existingProfile.BannerImagePath = updatedProfile.BannerImagePath;
+                }
+
+                // Save changes to the database
+                _dbContext.Profiles.Update(existingProfile);
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+                // Handle the case where the profile doesn't exist
+                throw new KeyNotFoundException("Profile not found for the provided user ID.");
+            }
         }
+
     }
 }

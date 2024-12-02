@@ -10,6 +10,6 @@ namespace EnterpriseProject.Services.Repositories
     public interface IProfileServices
     {
         Profile getProfile(int id);
-        void editProfile();
+        public void editProfile(Profile updatedProfile);
     }
 }

@@ -1,0 +1,20 @@
+﻿@model EnterpriseProject.Entities.Profile
+
+<form asp-action="EditProfile" asp-controller="User" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="AboutMe">About Me</label>
+        <textarea id="AboutMe" name="AboutMe" class="form-control" rows="3">@Model.AboutMe</textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="ProfilePicture">Profile Picture</label>
+        <input type="file" class="form-control" id="ProfilePicture" name="ProfilePicture" accept="image/*" />
+    </div>
+
+    <div class="form-group">
+        <label for="BannerImage">Banner Image</label>
+        <input type="file" class="form-control" id="BannerImage" name="BannerImage" accept="image/*" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
