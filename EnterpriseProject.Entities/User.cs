@@ -16,11 +16,12 @@ namespace EnterpriseProject.Entities
 
         [Required]
         [MaxLength(100)]
-        [EmailAddress]
+        
         public string UserName { get; set; } = String.Empty;
 
         [Required]
         [MaxLength(100)]
+        [EmailAddress]
         public string Email { get; set; } = String.Empty;
 
         [Required]

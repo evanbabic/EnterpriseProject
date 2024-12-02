@@ -58,5 +58,16 @@ namespace EnterpriseProject.Services.Repositories
         {
             return _dbContext.Users.Any(u => u.Email == email);
         }
+
+        public bool VerifyPassword(int userId, string password)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.UserId == userId);
+            if (user == null) return false;
+
+            // hashed passwords 
+            return BCrypt.Net.BCrypt.Verify(password, user.Password);
+        }
+
+
     }
 }
