@@ -20,6 +20,7 @@ namespace EnterpriseProject.Services.Repositories
         {
             return _dbContext.Profiles
                 .Include(p => p.User)
+                .ThenInclude(pr => pr.Projects)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.User)
                 .FirstOrDefault(p => p.UserId == userId);

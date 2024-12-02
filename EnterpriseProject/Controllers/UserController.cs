@@ -10,12 +10,14 @@ public class UserController : Controller
 	private readonly IUserServices _userRepository;
 	private readonly IProfileServices _profileRepository;
 	private readonly IResumeServices _resumeRepository;
+    private readonly ICommentServices _commentRepository;
 
-	public UserController(IUserServices userRepository, IProfileServices profileRepository, IResumeServices resumeRepository)
+	public UserController(IUserServices userRepository, IProfileServices profileRepository, IResumeServices resumeRepository, ICommentServices commentRepository)
 	{
 		_userRepository = userRepository;
 		_profileRepository = profileRepository;
 		_resumeRepository = resumeRepository;
+        _commentRepository = commentRepository;
 	}
 
 	[HttpGet]
@@ -35,9 +37,15 @@ public class UserController : Controller
 		return View(profile);
 	}
 
+	[HttpPost]
+	public IActionResult AddComment(int profileId, string content)
+	{
+		int userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+		_commentRepository.AddComment(userId, profileId, null, content);
+		return RedirectToAction("Profile", new { userId = userId });
+	}
 
-
-    [HttpGet]
+	[HttpGet]
     public IActionResult EditProfile(int userId)
     {
         

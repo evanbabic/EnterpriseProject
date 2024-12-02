@@ -22,7 +22,6 @@
   <ItemGroup>
     <Folder Include="DataLayer\" />
     <Folder Include="wwwroot\uploads\banner_images\" />
-    <Folder Include="wwwroot\uploads\profile_images\" />
   </ItemGroup>
 
 </Project>
