@@ -9,19 +9,29 @@ namespace EnterpriseProject.Operations.Controllers
         private readonly IResumeServices _resumeRepository;
         private readonly IProjectServices _projectRepository;
         private readonly IUserServices _userRepository;
+        private readonly ICommentServices _commentRepository;
 
         //Path of all project images
         private readonly string _imageFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "project_images");
 
-        public ProjectController(IResumeServices resumeRepository, IProjectServices projectRepository, IUserServices userRepository)
+        public ProjectController(IResumeServices resumeRepository, IProjectServices projectRepository, IUserServices userRepository, ICommentServices commentRepository)
         {
             _resumeRepository = resumeRepository;
             _projectRepository = projectRepository;
             _userRepository = userRepository;
+            _commentRepository = commentRepository;
         }
 
         public IActionResult ViewProject(int id) {
-            return View(_projectRepository.GetProject(id));
+            var project = _projectRepository.GetProject(id);
+
+            if (project == null) { return NotFound(); }
+
+            List<Comment>? comments = _commentRepository.GetCommentsByProjectId(project.ProjectId);
+
+            project.Comments = comments;
+
+            return View(project);
         }
 
         public IActionResult ViewProjects() {
@@ -109,6 +119,14 @@ namespace EnterpriseProject.Operations.Controllers
             
             _projectRepository.DeleteProject(id);
             return RedirectToAction("ViewProjects");
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(int projectId, string content)
+        {
+            int userId = int.Parse(User.FindFirst("UserId")?.Value ?? "0");
+            _commentRepository.AddComment(userId, null, projectId, content);
+            return RedirectToAction("ViewProject", new { id = projectId });
         }
     }
 }

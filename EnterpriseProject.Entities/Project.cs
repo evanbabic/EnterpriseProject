@@ -35,6 +35,6 @@ namespace EnterpriseProject.Entities
         public int UserID { get; set; } //Foreign Key
         public virtual User User { get; set; }  //Navigation Property
 
-        public List<Comment> Comments { get; set; } = new List<Comment>();
+        public List<Comment> Comments { get; set; }
     }
 }

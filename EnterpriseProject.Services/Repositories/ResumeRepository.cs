@@ -23,6 +23,20 @@ public class ResumeRepository(AppDbContext appDbContext) : IResumeServices
 		return resume;
 	}
 
+	public Resume? GetResumeByUserId(int userId)
+	{
+		var resume = appDbContext.Resumes.FirstOrDefault(r => r.UserId == userId);
+
+		if (resume != null)
+		{
+			resume.User = appDbContext.Users.Find(userId);
+		}
+
+		return resume;
+
+	}
+
+
 	public void UpdateResume(Resume employee)
 	{
 		appDbContext.Resumes.Update(employee);

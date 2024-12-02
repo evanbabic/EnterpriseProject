@@ -24,6 +24,7 @@ namespace EnterpriseProject.Operations.Controllers
 
 			Claim? myIdClaim = User.FindFirst(Entities.User.ClaimType);
 			int? myId = myIdClaim != null ? int.Parse(myIdClaim.Value) : null;
+
 			ViewBag.IsMyProfile = resume != null && myId.HasValue && resume.UserId == myId;
 
 			return View(resume);
