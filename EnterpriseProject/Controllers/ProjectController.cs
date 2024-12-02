@@ -28,7 +28,6 @@ namespace EnterpriseProject.Operations.Controllers
             if (project == null) { return NotFound(); }
 
             List<Comment>? comments = _commentRepository.GetCommentsByProjectId(project.ProjectId);
-
             project.Comments = comments;
 
             return View(project);

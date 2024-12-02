@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Entities
 {
-    public class User
+	/// <summary>
+    /// Author: Sahil
+	/// Represents a user in the system. Contains information such as username, email, password,
+	/// and related entities like projects, profile, resume, and comments.
+	/// </summary>
+    /// 
+	public class User
     {
         public const string ClaimType = "UserId";
 

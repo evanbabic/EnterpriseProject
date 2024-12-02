@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Entities
 {
-    public class Comment
+	/// <summary>
+	/// AUTHOR: EVAN
+	/// Model representing a comment that can either be on a profile or a project.
+    /// References the user who made it, profile its on, or project its on
+	/// </summary>
+	public class Comment
     {
         [Key]
         public int Id { get; set; }

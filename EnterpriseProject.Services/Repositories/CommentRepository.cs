@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public class CommentRepository : ICommentServices
+	/// <summary>
+    /// Author: Evan Babic
+	/// Repository class responsible for managing and interacting with comments in the database.
+	/// Implements ICommentServices to provide methods for adding and retrieving comments.
+	/// </summary>
+
+	public class CommentRepository : ICommentServices
     {
         private readonly AppDbContext _dbContext;
 

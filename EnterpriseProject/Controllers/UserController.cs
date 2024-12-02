@@ -123,11 +123,4 @@ public class UserController : Controller
 
         return RedirectToAction("Profile", "User", new { userId = userId });
     }
-
-
-
-
-
-
-
 }

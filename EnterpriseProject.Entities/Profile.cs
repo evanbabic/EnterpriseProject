@@ -8,10 +8,18 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Entities
 {
-    public class Profile
+	/// <summary>
+	/// AUTHOR: SAHIL
+	/// Model representing a user profile with associated details such as profile picture, banner image, about me section, and comments.
+	/// Linked to the User entity via the UserId.
+	/// </summary>
+
+	public class Profile
     {
-        [Key]
+
+		[Key]
         public int Id { get; set; }
+
         public string ProfilePicturePath { get; set; } = String.Empty;
         public string BannerImagePath { get; set; } = String.Empty;
         public string AboutMe { get; set; } = String.Empty;

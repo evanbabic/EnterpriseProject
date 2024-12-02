@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Entities
 {
-    public class Project
+	/// <summary>
+    /// Author: EVAN
+	/// Represents a project with associated details such as title, description, images, dates, and comments.
+	/// The Project class is linked to a User entity via the UserID.
+	/// </summary>
+    /// 
+	public class Project
     {
         [Key]
         public int ProjectId { get; set; }

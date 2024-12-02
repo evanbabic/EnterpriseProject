@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public class UserRepository : IUserServices
+	/// <summary>
+    /// Author: Sahil
+	/// Repository class responsible for managing resume-related operations in the database.
+	/// Implements IResumeServices to provide methods for adding, retrieving, updating, and deleting resumes.
+	/// </summary>
+	public class UserRepository : IUserServices
     {
         private readonly AppDbContext _dbContext;
 

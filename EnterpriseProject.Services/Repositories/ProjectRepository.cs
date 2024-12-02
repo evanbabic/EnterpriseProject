@@ -8,7 +8,13 @@ using System.Threading.Tasks;
 
 namespace EnterpriseProject.Services.Repositories
 {
-    public class ProjectRepository: IProjectServices
+	/// <summary>
+    /// Author: Evan
+	/// Repository class responsible for managing and interacting with user profiles in the database.
+	/// Implements IProfileServices to provide methods for retrieving and editing profiles.
+	/// </summary>
+    /// 
+	public class ProjectRepository: IProjectServices
     {
         private readonly AppDbContext _dbContext;
 

@@ -3,7 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EnterpriseProject.Entities
 {
-    public class Resume
+	/// <summary>
+    /// Author: Nicholas
+	/// Represents a user's resume with associated file path and user information.
+	/// The Resume class is linked to a User entity via the UserId.
+	/// </summary>
+	public class Resume
     {
         [Key]
         public int ResumeId { get; set; }
