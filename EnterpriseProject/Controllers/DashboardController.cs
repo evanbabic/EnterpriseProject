@@ -50,7 +50,7 @@ namespace EnterpriseProject.Operations.Controllers
                     // Compare plaintext password
                     isPasswordValid = user.Password == password;
 
-                    // Optionally: hash the plaintext password after successful login
+                    // Hash the plaintext password after successful login
                     if (isPasswordValid)
                     {
                         user.Password = BCrypt.Net.BCrypt.HashPassword(password);
@@ -84,8 +84,6 @@ namespace EnterpriseProject.Operations.Controllers
             ViewBag.ErrorMessage = "Invalid username/email or password.";
             return View();
         }
-
-
 
         [Route("register")]
         [HttpGet]
