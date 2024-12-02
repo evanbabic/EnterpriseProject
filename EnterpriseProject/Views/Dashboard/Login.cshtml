@@ -1,15 +1,27 @@
-﻿<h2>Login</h2>
-<form method="post">
-    <div>
-        <label>Username or Email:</label>
-        <input type="text" name="loginIdentifier" required />
+﻿
+<br /><br /><br />
+<div class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg" style="max-width: 400px; width: 100%;">
+        <div class="card-body">
+            <h4 class="card-title text-center mb-4">Login</h4>
+            <form method="post">
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email or Username</label>
+                    <input type="text" id="loginIdentifier" name="loginIdentifier" class="form-control" placeholder="Enter your email" required />
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputPassword" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required />
+                </div>
+                <br />
+
+                <button type="submit" class="btn btn-primary w-100">Sign In</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <label>Password:</label>
-        <input type="password" name="password" required />
-    </div>
-    <button type="submit">Login</button>
-</form>
+</div>
+
 @if (ViewBag.ErrorMessage != null)
 {
     <p style="color: red;">@ViewBag.ErrorMessage</p>

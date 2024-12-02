@@ -1,39 +1,46 @@
 ﻿@model EnterpriseProject.Entities.User
 
-<h2>Welcome, @Model.UserName!</h2>
-
 <div>
-    <h3>Your Profile Details:</h3>
-    <ul>
-        <li><strong>Email:</strong> @Model.Email</li>
-        <li><strong>Projects:</strong> @Model.Projects.Count</li>
-        <li><strong>Resume:</strong> @(Model.Resume != null ? "Uploaded" : "Not Uploaded")</li>
-    </ul>
-</div>
+    <h2>Welcome, @Model.UserName!</h2>
 
-<div>
-    <h3>Your Projects:</h3>
-    @if (Model.Projects.Any())
-    {
+    <div>
+        <h3>Your Profile Details:</h3>
         <ul>
-            @foreach (var project in Model.Projects)
-            {
-                <li>
-                    <strong>@project.ProjectTitle</strong>: @project.Description
-                    <br />
-                    <em>Started:</em> @project.StartDate.ToShortDateString()
-                    @if (project.CompletedDate != DateTime.MinValue)
-                    {
-                        <em>, Completed:</em> @project.CompletedDate.ToShortDateString()
-                    }
-                </li>
-            }
+            <li><strong>Email:</strong> @Model.Email</li>
+            <li><strong>Projects:</strong> @Model.Projects.Count</li>
+            <li><strong>Resume:</strong> @(Model.Resume != null ? "Uploaded" : "Not Uploaded")</li>
         </ul>
-    }
-    else
-    {
-        <p>You don't have any projects yet.</p>
-    }
+    </div>
+
+    <div class="container-sm">
+        <h3>Your Projects:</h3>
+        @if (Model.Projects.Any())
+        {
+            <ul>
+                @foreach (var project in Model.Projects)
+                {
+                    <li>
+                        <strong>@project.ProjectTitle</strong>: @project.Description
+                        <br />
+                        <em>Started:</em> @project.StartDate.ToShortDateString()
+                        @if (project.CompletedDate != DateTime.MinValue)
+                        {
+                            <em>, Completed:</em> @project.CompletedDate.ToShortDateString()
+                        }
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>You don't have any projects yet.</p>
+        }
+    </div>
+
+
+
+
+
+
+
 </div>
-
-

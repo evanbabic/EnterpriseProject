@@ -83,9 +83,6 @@ namespace EnterpriseProject.Operations.Controllers
         }
 
 
-
-
-
         [HttpGet]
         public IActionResult Register()
         {
