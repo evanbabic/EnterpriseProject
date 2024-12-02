@@ -1,4 +1,5 @@
 ﻿using EnterpriseProject.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,11 @@ namespace EnterpriseProject.Services.Repositories
 
             _dbContext.Comments.Add(comment);
             _dbContext.SaveChanges();
+        }
+
+        public List<Comment> GetCommentsByProjectId(int projectId)
+        {
+            return _dbContext.Comments.Where(c => c.ProjectId == projectId).Include(c => c.User).OrderByDescending(c => c.CreatedAt).ToList();
         }
     }
 }

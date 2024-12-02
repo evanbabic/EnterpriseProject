@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EnterpriseProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace EnterpriseProject.Services.Repositories
     public interface ICommentServices
     {
         void AddComment(int userId, int? profileId, int? projectId, string content);
+
+        public List<Comment> GetCommentsByProjectId(int projectId);
     }
 }

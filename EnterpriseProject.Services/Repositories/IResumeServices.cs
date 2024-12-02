@@ -9,5 +9,7 @@ public interface IResumeServices
 	void UpdateResume(Resume employee);
 	void DeleteResume(int id);
 
+	Resume? GetResumeByUserId(int userId);
+
 	IEnumerable<Resume> GetResumes();
 }

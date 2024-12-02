@@ -13,6 +13,8 @@ builder.Services.AddScoped<IResumeServices, ResumeRepository>();
 builder.Services.AddScoped<IProjectServices, ProjectRepository>();
 builder.Services.AddScoped<IUserServices, UserRepository>();
 builder.Services.AddScoped<IProfileServices, ProfileRepository>();
+builder.Services.AddScoped<ICommentServices, CommentRepository>();
+
 
 //Adding authentication here
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

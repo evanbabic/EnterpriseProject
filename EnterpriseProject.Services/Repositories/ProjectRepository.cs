@@ -23,6 +23,7 @@ namespace EnterpriseProject.Services.Repositories
         public Project? GetProject(int projectId) {
             Project? project = _dbContext.Projects
                 .Include(p => p.User)
+                .Include(p => p.Comments)
                 .FirstOrDefault(p => p.ProjectId == projectId);
 
             return project;
