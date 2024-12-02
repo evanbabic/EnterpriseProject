@@ -86,8 +86,11 @@ namespace EnterpriseProject.Operations.Controllers
         }
 
 
+<<<<<<< HEAD
 
         [Route("register")]
+=======
+>>>>>>> feature/comments
         [HttpGet]
         public IActionResult Register()
         {
