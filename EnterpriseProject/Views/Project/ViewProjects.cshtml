@@ -23,7 +23,18 @@
                         <div class="card-body">
                             <h5 class="card-title">@project.ProjectTitle</h5>
                             <p class="card-text">@project.Description</p>
-                            <p><strong>By:</strong> @project.User.UserName</p>
+                            <p>
+                                <strong>By:</strong>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <a href="@Url.Action("Profile", "User", new { userId = project.User.UserId })">@project.User.UserName</a>
+                                }
+                                else
+                                {
+                                    <!-- If not authenticated, redirect to the login page directly when username is clicked -->
+                                    <a href="@Url.Action("","login")">@project.User.UserName</a>
+                                }
+                            </p>
 
                             <div class="container text-center">
                                 <a href="@Url.Action("ViewProject", "Project", new { id = project.ProjectId })" class="btn btn-dark btn-sm">View Project</a>
